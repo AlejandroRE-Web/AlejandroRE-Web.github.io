@@ -1,1 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/styles.css">
 
+    <title>Document</title>
+</head>
+<body>
+    <!-- <input type="tel">
+    <input type="email">
+    <input type="password">
+    <input type="number"> -->
+<!-- Activacion de sistema de envio y validacion -->
+    <header>
+        <h1>Datos Usuario</h1>
+    </header>
+    <form action="https://www.w3schools.com/action_page.php">
+
+        <div class="form-container">
+            <div class="form-group">
+                <label for="nombre">Nombre de Usuario</label>
+                <input type="text" id="nombre" name="nombre" placeholder="UserName">
+            </div>
+
+            <div class="form-group">
+                <label for="Contraseña">Contraseña</label>
+                <input type="password" id="email" name="email" placeholder="Introduce Contraseña">
+            <div class="checkbox-container">
+                <input type="checkbox" id="terminos" name="terminos" value="acepto"> Mostrar Contraseña
+            </div>
+            </div>
+        </div>
+
+        <h1>Datos Personales</h1>
+
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos">
+                </div>
+            </div>
+        
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Ingrese su teléfono">
+                </div>
+                <div class="form-group">
+                    <label for="codigoPostal">Código Postal</label>
+                    <input type="text" id="codigoPostal" name="codigoPostal" placeholder="38XXX">
+                </div>
+            </div>
+        
+            <div class="op">
+                <div class="form-group">
+                    <label for="dni">DNI/NIE</label>
+                    <div>
+                        <select name="dni" id="dni">
+                            <option value="" disabled selected>...</option>
+                            <option value="dni">DNI</option>
+                            <option value="nie">NIE</option>
+                        </select>
+
+                        <input class="dni" type="text" placeholder="DNI/NIE">
+                    </div>      
+                </div>
+                <div class="form-group">
+                    <label for="">Crear cuenta como:</label>
+                    <div>
+                        <input type="radio" id="particular" name="cuentaTipo" value="particular">
+                        Particular
+                    
+                        <input type="radio" id="empresa" name="cuentaTipo" value="empresa">
+                        Empresa    
+                    </div>
+                </div>
+                <div class="form-group full-width">
+                    <label for="año">Año de Nacimiento</label>
+                    <select name="año" id="año">
+                        <option value="" disabled selected>2010</option>
+                    </select>
+                </div>
+            </div>            
+        </div>
+
+        <div class="aficiones-container">
+            <label for="">Elige tus aficiones:</label>
+            <div class="aficiones-grid">
+                <div class="aficion">
+                    <input type="checkbox" id="musica" name="aficiones" value="musica">
+                    <label for="musica">Música</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" id="deporte" name="aficiones" value="deporte">
+                    <label for="deporte">Deporte</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" id="videojuegos" name="aficiones" value="videojuegos">
+                    <label for="videojuegos">Video Juegos</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" id="manualidades" name="aficiones" value="manualidades">
+                    <label for="manualidades">Manualidades</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" id="artes" name="aficiones" value="artes">
+                    <label for="artes">Artes</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" id="lectura" name="aficiones" value="lectura">
+                    <label for="lectura">Lectura</label>
+                </div>
+            </div>
+        </div>
+
+
+        <h1>Datos Publicación</h1>
+
+
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="tyi" placeholder="Título">
+  
+            <label for="Descripción">Descripción</label>
+            <textarea type="email" id="email" name="email" placeholder="Apellidos">
+                </textarea>
+        </div>
+        
+        <input type="submit" value="Enviar formulario">
+
+      </form>
+      <script src="./script/script.js"></script>
+</body>
+</html>

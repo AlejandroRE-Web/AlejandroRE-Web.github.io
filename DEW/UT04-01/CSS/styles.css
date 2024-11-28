@@ -1,0 +1,49 @@
+h1 {
+    border-bottom: 1px solid #000;
+    padding-bottom: 5px;
+    width: 100%;
+}
+  
+label {
+    display: block;
+
+}
+
+/* Ajustes para el contenedor de formularios */
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 2em; 
+    width: 100%; 
+}
+
+/* Ajustes para los grupos de formularios */
+.form-group {
+    display: flex;
+    flex-direction: column; 
+}
+
+/* Ajustes para el checkbox */
+input {
+    margin-bottom: 1em; 
+    border-radius: 0.2em;
+}
+
+.op{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 1em; 
+}
+
+.aficiones-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.aficion{
+    display: flex;
+    flex-direction: row;
+}
+
+.dni{
+    background-color: lightgray;
+}
