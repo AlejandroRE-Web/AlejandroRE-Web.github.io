@@ -8,11 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- <input type="tel">
-    <input type="email">
-    <input type="password">
-    <input type="number"> -->
-<!-- Activacion de sistema de envio y validacion -->
     <header>
         <h1>Datos Usuario</h1>
     </header>
@@ -21,12 +16,12 @@
         <div class="form-container">
             <div class="form-group">
                 <label for="NombreUsuario">Nombre de Usuario</label>
-                <input type="text" id="NombreUsuario" name="NombreUsuario" placeholder="UserName">
+                <input type="text" id="NombreUsuario" name="NombreUsuario" placeholder="UserName" required minlength="4" maxlength="20"> <!-- Ponemos el required para que no deje enviar el formulario si hay campos vacios -->
             </div>
 
             <div class="form-group">
                 <label for="Contrasena">Contraseña</label>
-                <input type="password" id="Contrasena" name="Contrasena" placeholder="Introduce Contraseña">
+                <input type="password" id="Contrasena" name="Contrasena" placeholder="Introduce Contraseña" required maxlength="8">
             <div class="checkbox-container">
                 <input type="checkbox" id="terminos" name="terminos" value="acepto"> Mostrar Contraseña
             </div>
@@ -38,22 +33,22 @@
             <div class="form-container">
                 <div class="form-group">
                     <label for="Nombre">Nombre</label>
-                    <input type="text" id="Nombre" name="Nombre" placeholder="Nombre">
+                    <input type="text" id="Nombre" name="Nombre" placeholder="Nombre" required minlength="4" maxlength="20">
                 </div>
                 <div class="form-group">
                     <label for="Apellidos">Apellidos</label>
-                    <input type="text" id="Apellidos" name="Apellidos" placeholder="Apellidos">
+                    <input type="text" id="Apellidos" name="Apellidos" placeholder="Apellidos" required minlength="4" maxlength="20">
                 </div>
             </div>
         
             <div class="form-container">
                 <div class="form-group">
                     <label for="Telefono">Teléfono</label>
-                    <input type="tel" id="Telefono" name="Telefono" placeholder="Ingrese su teléfono">
+                    <input type="tel" id="Telefono" name="Telefono" placeholder="Ingrese su teléfono" required>
                 </div>
                 <div class="form-group">
                     <label for="CodigoPostal">Código Postal</label>
-                    <input type="text" id="CodigoPostal" name="CodigoPostal" placeholder="38XXX">
+                    <input type="text" id="CodigoPostal" name="CodigoPostal" placeholder="38XXX" required>
                 </div>
             </div>
         
@@ -61,75 +56,117 @@
                 <div class="form-group">
                     <label for="DniNie">DNI/NIE</label>
                     <div>
+                        <!-- Aqui como hacer para que esto sea required -->
                         <select name="DniNie" id="DniNie">
                             <option value="" disabled selected>...</option>
                             <option value="dni">DNI</option>
                             <option value="nie">NIE</option>
                         </select>
 
-                        <input class="dni" type="text" placeholder="DNI/NIE">
+                        <input class="dni" type="text" placeholder="DNI/NIE" required>
                     </div>      
                 </div>
                 <div class="form-group">
                     <label for="">Crear cuenta como:</label>
                     <div>
-                        <input type="radio" id="particular" name="cuentaTipo" value="particular">
+                        <input type="radio" id="particular" name="cuentaTipo" value="particular" required>
                         Particular
                     
-                        <input type="radio" id="empresa" name="cuentaTipo" value="empresa">
+                        <input type="radio" id="empresa" name="cuentaTipo" value="empresa" required>
                         Empresa    
                     </div>
                 </div>
                 <div class="form-group full-width">
-                    <label for="año">Año de Nacimiento</label>
-                    <select name="año" id="año">
+                    <label for="AnioNacimiento">Año de Nacimiento</label>
+                    <select name="AnioNacimiento" id="AnioNacimiento">
                         <option value="" disabled selected>2010</option>
                     </select>
                 </div>
             </div>            
         </div>
 
+
+
+
+
         <div class="aficiones-container">
-            <label for="">Elige tus aficiones:</label>
+            <label for="Aficiones">Elige tus aficiones:</label>
+            <input type="hidden" id="Aficiones" name="Aficiones" value="">
             <div class="aficiones-grid">
                 <div class="aficion">
-                    <input type="checkbox" id="musica" name="aficiones" value="musica">
-                    <label for="musica">Música</label>
+                    <input type="checkbox" id="MU" value="MU" onchange="updateAficiones()">
+                    <label for="MU">Música</label>
                 </div>
                 <div class="aficion">
-                    <input type="checkbox" id="deporte" name="aficiones" value="deporte">
-                    <label for="deporte">Deporte</label>
+                    <input type="checkbox" id="DE" value="DE" onchange="updateAficiones()">
+                    <label for="DE">Deporte</label>
                 </div>
                 <div class="aficion">
-                    <input type="checkbox" id="videojuegos" name="aficiones" value="videojuegos">
-                    <label for="videojuegos">Video Juegos</label>
+                    <input type="checkbox" id="VI" value="VI" onchange="updateAficiones()">
+                    <label for="VI">Video Juegos</label>
                 </div>
                 <div class="aficion">
-                    <input type="checkbox" id="manualidades" name="aficiones" value="manualidades">
-                    <label for="manualidades">Manualidades</label>
+                    <input type="checkbox" id="MA" value="MA" onchange="updateAficiones()">
+                    <label for="MA">Manualidades</label>
                 </div>
                 <div class="aficion">
-                    <input type="checkbox" id="artes" name="aficiones" value="artes">
-                    <label for="artes">Artes</label>
+                    <input type="checkbox" id="AR" value="AR" onchange="updateAficiones()">
+                    <label for="AR">Artes</label>
                 </div>
                 <div class="aficion">
-                    <input type="checkbox" id="lectura" name="aficiones" value="lectura">
-                    <label for="lectura">Lectura</label>
+                    <input type="checkbox" id="LE" value="LE" onchange="updateAficiones()">
+                    <label for="LE">Lectura</label>
                 </div>
             </div>
         </div>
+
+        <!-- Se ha añadido un campo oculto <input type="hidden" id="Aficiones" name="Aficiones" value=""> que contendrá la lista de aficiones seleccionadas.
+        Cada checkbox de afición tiene ahora un id y value que corresponde a las dos primeras letras en mayúscula de la afición.
+        Se ha añadido un evento onchange a cada checkbox que llama a la función updateAficiones().
+        Se ha incluido un script que define la función updateAficiones(). Esta función se encarga de actualizar el campo oculto con la lista de aficiones seleccionadas, separadas por comas.
+ -->
+
+        <!-- <div class="aficiones-container">
+            <label for="">Elige tus aficiones:</label>
+            <div class="aficiones-grid">
+                <div class="aficion">
+                    <input type="checkbox" id="musica" name="Aficiones" value="musica" required>
+                    <label for="musica">Música</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" id="deporte" name="Aficiones" value="deporte" required>
+                    <label for="deporte">Deporte</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" id="videojuegos" name="Aficiones" value="videojuegos" required>
+                    <label for="videojuegos">Video Juegos</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" id="manualidades" name="Aficiones" value="manualidades" required>
+                    <label for="manualidades">Manualidades</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" id="artes" name="Aficiones" value="artes" required>
+                    <label for="artes">Artes</label>
+                </div>
+                <div class="aficion">
+                    <input type="checkbox" id="lectura" name="Aficiones" value="lectura" required>
+                    <label for="lectura">Lectura</label>
+                </div>
+            </div>
+        </div> -->
 
 
         <h1>Datos Publicación</h1>
 
 
         <div class="form-group">
-            <label for="titulo">Título</label>
-            <input type="text" id="titulo" name="tyi" placeholder="Título">
+            <label for="PublicacionTitulo">Título</label>
+            <input type="text" id="PublicacionTitulo" name="PublicacionTitulo" placeholder="Título" required minlength="4" maxlength="15">
   
-            <label for="Descripción">Descripción</label>
-            <textarea type="email" id="email" name="email" placeholder="Apellidos">
-                </textarea>
+            <label for="PublicacionDescripcion">Descripción</label>
+            <textarea type="email" id="PublicacionDescripcion" name="PublicacionDescripcion" required minlength="4" maxlength="120">
+            </textarea>
         </div>
         
         <input type="submit" value="Enviar formulario">

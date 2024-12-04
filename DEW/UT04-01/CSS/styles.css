@@ -47,3 +47,9 @@ input {
 .dni{
     background-color: lightgray;
 }
+
+
+/*Para todos los datos se muestra información en caso de error, colocada bajo el borde rojo que indica error*/
+input :valid{
+    border: solid red 0.2em;
+}
