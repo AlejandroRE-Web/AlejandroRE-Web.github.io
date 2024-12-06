@@ -53,3 +53,13 @@ input {
 input :valid{
     border: solid red 0.2em;
 }
+
+.error {
+    border: 1px solid red;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+}

@@ -1,104 +1,188 @@
-
-// Obtenemos el elemento select
-const selectAño = document.getElementById('AnioNacimiento');
-
-// Definimos el rango de años
-const inicio = 1920;
-const fin = 2010;
-
-// Creamos las opciones para cada año
-for (let año = inicio; año <= fin; año++) {
-    const option = document.createElement('option');
-    option.value = año;
-    option.textContent = año;
-    selectAño.appendChild(option);
-}
-
- // Mostrar/ocultar contraseña
- const passwordInput = document.getElementById('Contrasena');
- const showPasswordCheckbox = document.getElementById('terminos');
-
- showPasswordCheckbox.addEventListener('change', function() {
-     passwordInput.type = this.checked ? 'text' : 'password';
- });
-
-/*
-
-Valida que todos los campos obligatorios estén llenos (gracias al atributo required).
-Verifica que al menos dos aficiones estén seleccionadas.
-
-para seleccionar al menos 2
-
-
- document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('userForm');
-    const aficionesCheckboxes = document.querySelectorAll('input[name="Aficiones"]');
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        // Validar que al menos dos aficiones están seleccionadas
-        let aficionesSeleccionadas = 0;
-        aficionesCheckboxes.forEach(checkbox => {
-            if (checkbox.checked) aficionesSeleccionadas++;
-        });
-
-        if (aficionesSeleccionadas < 2) {
-            alert('Por favor, selecciona al menos dos aficiones.');
-            return;
-        }
-
-        // Si todo está correcto, enviar el formulario
-        this.submit();
-    });
- 
-
-*/
- //PARA DNI Y NIE
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
-    const tipoDocumento = document.getElementById('TipoDocumento');
-    const numeroDocumento = document.getElementById('NumeroDocumento');
+    //Recoger todas las variables
+    const form = document.querySelector('.formulario');
+    const passwordInput = document.getElementById('Contrasena');
+    const showPasswordCheckbox = document.getElementById('terminos');
+    const dniNieSelect = document.getElementById('DniNie');
+    const dniNieInput = document.querySelector('.dni');
+    const aficionesCheckboxes = document.querySelectorAll('.aficiones-grid input[type="checkbox"]');
+    const aficionesHiddenInput = document.getElementById('Aficiones');
+    const anioNacimientoSelect = document.getElementById('AnioNacimiento');
 
-    form.addEventListener('submit', function(event) {
-        if (!validarDocumento()) {
-            event.preventDefault();
-            alert('El número de documento no es válido');
-        }
+    // Generar opciones para el año de nacimiento
+    for (let year = 2010; year >= 1920; year--) {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        anioNacimientoSelect.appendChild(option);
+    }
+
+    // Mostrar/ocultar contraseña
+    showPasswordCheckbox.addEventListener('change', function() {
+        passwordInput.type = this.checked ? 'text' : 'password';
     });
 
-    function validarDocumento() {
-        const tipo = tipoDocumento.value;
-        const numero = numeroDocumento.value.toUpperCase();
+    // Actualizar el valor del input DNI/NIE basado en la selección
+    dniNieSelect.addEventListener('change', function() {
+        dniNieInput.placeholder = this.value.toUpperCase();
+    });
 
-        if (tipo === 'dni') {
-            return validarDNI(numero);
-        } else if (tipo === 'nie') {
-            return validarNIE(numero);
+    // Función para actualizar las aficiones seleccionadas
+    function updateAficiones() {
+        const selectedAficiones = Array.from(aficionesCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+        aficionesHiddenInput.value = selectedAficiones.join(', ');
+    }
+
+    // Asignar la función updateAficiones a cada checkbox de aficiones
+    aficionesCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateAficiones);
+    });
+
+    // Funciones de validación
+    function validateDniNie(value, type) {
+        if (type === 'dni') {
+            return /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i.test(value);
+        } else if (type === 'nie') {
+            return /^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/i.test(value);
         }
         return false;
     }
 
-    function validarDNI(dni) {
-        const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
-        const numero = dni.substr(0, dni.length - 1);
-        const letra = dni.substr(dni.length - 1, 1);
-        const resto = numero % 23;
-        return letra === letras.charAt(resto);
+    //De estas formas validamos que este bien tanto el codigo postal como el numero de telegono
+    function validateCodigoPostal(value) {
+        return /^38\d{3}$/.test(value);
     }
 
-    function validarNIE(nie) {
-        const primerCaracter = nie.charAt(0);
-        let numero = nie.substr(1, nie.length - 2);
-        const letra = nie.substr(nie.length - 1, 1);
+    function validateTelefono(value) {
+        return /^\(\+34\)922\d{6}$/.test(value);
+    }
 
-        switch (primerCaracter) {
-            case 'X': numero = '0' + numero; break;
-            case 'Y': numero = '1' + numero; break;
-            case 'Z': numero = '2' + numero; break;
-            default: return false;
+    function validateContrasena(value) {
+        return /^\d{8}$/.test(value);
+    }
+
+    function validateLength(value, min, max) {
+        return value.length >= min && value.length <= max;
+    }
+
+    // Función para mostrar mensajes de error
+    function showError(element, message) {
+        element.classList.add('error');
+        let errorElement = element.nextElementSibling;
+        if (!errorElement || !errorElement.classList.contains('error-message')) {
+            errorElement = document.createElement('div');
+            errorElement.classList.add('error-message');
+            element.parentNode.insertBefore(errorElement, element.nextSibling);
+        }
+        errorElement.textContent = message;
+    }
+
+    // Función para limpiar mensajes de error
+    function clearError(element) {
+        element.classList.remove('error');
+        let errorElement = element.nextElementSibling;
+        if (errorElement && errorElement.classList.contains('error-message')) {
+            errorElement.remove();
+        }
+    }
+
+    // Validación del formulario
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let isValid = true;
+
+        // Validar NombreUsuario, Nombre, Apellidos
+        ['NombreUsuario', 'Nombre', 'Apellidos'].forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (!validateLength(field.value, 4, 20)) {
+                isValid = false;
+                showError(field, `Por favor, introduce entre 4 y 20 caracteres para ${fieldId}.`);
+            } else {
+                clearError(field);
+            }
+        });
+
+        // Validar Contraseña
+        if (!validateContrasena(passwordInput.value)) {
+            isValid = false;
+            showError(passwordInput, 'La contraseña debe contener exactamente 8 números.');
+        } else {
+            clearError(passwordInput);
         }
 
-        return validarDNI(numero + letra);
-    }
+        // Validar Teléfono
+        const telefonoInput = document.getElementById('Telefono');
+        if (!validateTelefono(telefonoInput.value)) {
+            isValid = false;
+            showError(telefonoInput, 'Por favor, introduce un número de teléfono válido con el formato (+34)922123123.');
+        } else {
+            clearError(telefonoInput);
+        }
+
+        // Validar Código Postal
+        const codigoPostalInput = document.getElementById('CodigoPostal');
+        if (!validateCodigoPostal(codigoPostalInput.value)) {
+            isValid = false;
+            showError(codigoPostalInput, 'El código postal debe comenzar por 38 y tener 5 números en total.');
+        } else {
+            clearError(codigoPostalInput);
+        }
+
+        // Validar DNI/NIE
+        if (dniNieSelect.value && dniNieInput.value) {
+            if (!validateDniNie(dniNieInput.value, dniNieSelect.value)) {
+                isValid = false;
+                showError(dniNieInput, 'El número de documento introducido no es válido.');
+            } else {
+                clearError(dniNieInput);
+            }
+        } else {
+            isValid = false;
+            showError(dniNieSelect, 'Por favor, selecciona y completa tu documento de identidad.');
+        }
+
+        // Validar tipo de cuenta
+        const cuentaTipoContainer = document.querySelector('.form-group:has(input[name="cuentaTipo"])');
+        if (!form.querySelector('input[name="cuentaTipo"]:checked')) {
+            isValid = false;
+            showError(cuentaTipoContainer, 'Por favor, selecciona el tipo de cuenta.');
+        } else {
+            clearError(cuentaTipoContainer);
+        }
+
+        // Validar aficiones (al menos 2)
+        const aficionesContainer = document.querySelector('.aficiones-container');
+        if (document.querySelectorAll('.aficiones-grid input[type="checkbox"]:checked').length < 2) {
+            isValid = false;
+            showError(aficionesContainer, 'Por favor, selecciona al menos 2 aficiones.');
+        } else {
+            clearError(aficionesContainer);
+        }
+
+        // Validar PublicacionTitulo
+        const publicacionTituloInput = document.getElementById('PublicacionTitulo');
+        if (!validateLength(publicacionTituloInput.value, 4, 15)) {
+            isValid = false;
+            showError(publicacionTituloInput, 'El título debe tener entre 4 y 15 caracteres.');
+        } else {
+            clearError(publicacionTituloInput);
+        }
+
+        // Validar PublicacionDescripcion
+        const publicacionDescripcionInput = document.getElementById('PublicacionDescripcion');
+        if (!validateLength(publicacionDescripcionInput.value, 4, 120)) {
+            isValid = false;
+            showError(publicacionDescripcionInput, 'La descripción debe tener entre 4 y 120 caracteres.');
+        } else {
+            clearError(publicacionDescripcionInput);
+        }
+
+        if (isValid) {
+            // Si todo es válido, enviar el formulario
+            form.submit();
+        }
+    });
 });

@@ -11,7 +11,7 @@
     <header>
         <h1>Datos Usuario</h1>
     </header>
-    <form action="https://www.w3schools.com/action_page.php">
+    <form action="https://www.w3schools.com/action_page.php" novalidate class="formulario">
 
         <div class="form-container">
             <div class="form-group">
@@ -91,7 +91,9 @@
 
         <div class="aficiones-container">
             <label for="Aficiones">Elige tus aficiones:</label>
+
             <input type="hidden" id="Aficiones" name="Aficiones" value="">
+
             <div class="aficiones-grid">
                 <div class="aficion">
                     <input type="checkbox" id="MU" value="MU" onchange="updateAficiones()">
@@ -125,38 +127,6 @@
         Se ha añadido un evento onchange a cada checkbox que llama a la función updateAficiones().
         Se ha incluido un script que define la función updateAficiones(). Esta función se encarga de actualizar el campo oculto con la lista de aficiones seleccionadas, separadas por comas.
  -->
-
-        <!-- <div class="aficiones-container">
-            <label for="">Elige tus aficiones:</label>
-            <div class="aficiones-grid">
-                <div class="aficion">
-                    <input type="checkbox" id="musica" name="Aficiones" value="musica" required>
-                    <label for="musica">Música</label>
-                </div>
-                <div class="aficion">
-                    <input type="checkbox" id="deporte" name="Aficiones" value="deporte" required>
-                    <label for="deporte">Deporte</label>
-                </div>
-                <div class="aficion">
-                    <input type="checkbox" id="videojuegos" name="Aficiones" value="videojuegos" required>
-                    <label for="videojuegos">Video Juegos</label>
-                </div>
-                <div class="aficion">
-                    <input type="checkbox" id="manualidades" name="Aficiones" value="manualidades" required>
-                    <label for="manualidades">Manualidades</label>
-                </div>
-                <div class="aficion">
-                    <input type="checkbox" id="artes" name="Aficiones" value="artes" required>
-                    <label for="artes">Artes</label>
-                </div>
-                <div class="aficion">
-                    <input type="checkbox" id="lectura" name="Aficiones" value="lectura" required>
-                    <label for="lectura">Lectura</label>
-                </div>
-            </div>
-        </div> -->
-
-
         <h1>Datos Publicación</h1>
 
 
